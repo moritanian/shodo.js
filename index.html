@@ -1,0 +1,177 @@
+<html>
+<head>
+  <title>Realtime View</title>
+  <script
+  src="http://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+  crossorigin="anonymous"></script>
+  <script src='./script/shodo.js'></script>
+  <link rel="stylesheet" href="./style.css">
+ 
+  <script type="text/javascript">
+  'use strict';
+
+  $(function(){
+
+    var canvas, brush;
+    var $clearBtn, $angleInput, $footPrintAngle, 
+      $footPrintSize, $blurRange, $thicknessRange,
+      $thicknessValue, $blurValue;
+
+
+    /*
+      UI components
+    */
+
+    $clearBtn = $("#clear-btn");
+    $angleInput = $("#angle-input");
+    $footPrintAngle = $("#foot-print-angle");
+    $footPrintSize = $("#foot-print-size");
+    $blurRange = $("#blur-range");
+    $thicknessRange = $("#thickness-range");
+    $thicknessValue = $("#thickness-value");
+    $blurValue = $("#blur-value");
+
+
+    // hude  
+    canvas  = new Shodo.Canvas('canvas');
+    brush = new Shodo.Brush(canvas);
+    
+    setThickness(36);
+    setBlur(2.8);
+    brush.tipAngle = Math.PI/180*45;
+   
+
+    /*
+      buttons 
+    */
+    let angleInputWidth = $angleInput.width();
+    let angleInputHeight = $angleInput.height();
+    let angleInputLeft = $angleInput.offset().left;
+    let angleInputTop = $angleInput.offset().top;
+    $angleInput.click(function(e){
+      let posX = e.clientX - angleInputLeft - angleInputWidth/2;
+      let posY = e.clientY - angleInputTop - angleInputHeight/2;
+      let sita = Math.atan2(posY, posX);
+      brush.tipAngle = sita + Math.PI;
+      sita -= Math.PI * 5 /4.0;
+       $footPrintAngle.css("transform",
+           ` rotate(${sita*180/Math.PI}deg)`);
+    });
+
+    $thicknessRange.on("input", function(){
+      let thickness = $(this).val();
+      setThickness(thickness);
+    });
+
+    function setThickness(thickness){
+      brush.width = thickness;
+      $footPrintSize.css("width", `${thickness}px`);
+      $footPrintSize.css("height", `${thickness}px`);
+      $footPrintSize.css("background-size", `${thickness}px`);
+      $thicknessValue.text(thickness);
+    }
+
+
+    $blurRange.on("input", function(){
+      let blur = $(this).val()/10.0;
+      setBlur(blur);
+    });
+
+    function setBlur(blur){
+      brush.blur = blur;
+      $blurValue.text(blur);
+    }
+
+    $clearBtn.click(function(){
+      let count = 0;
+      let top = 0;
+      let left = -0;
+      let shadow = 0;
+      let skew = 0;
+
+      const countMax = 10;
+      let $paintBox = $("#paint-box");
+      function animation(){
+        count ++;
+        
+        if (count == countMax){
+          canvas.clear();
+          $paintBox.css("top", `0px`);
+          $paintBox.css("left", `0px`);
+          $paintBox.css("transform",
+           ` matrix3d(1, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)`);
+          $paintBox.css("box-shadow", `inset #00000000 200px 0px 300px 1px`);
+
+          return;
+        }
+
+        top += 800 / countMax;
+        left -= 100/countMax;
+        shadow += 160 / countMax;
+        skew += 0.2 / countMax;
+
+        $paintBox.css("top", `${top}px`);
+        $paintBox.css("left", `${left}px`);
+        $paintBox.css("transform",
+           ` matrix3d(1, ${skew}, 0, 0, 0, 1.0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)`);
+        let transparency = shadow.toString(16);
+        if(shadow < 16){
+          transparency = "0" + transparency;
+        }
+        $paintBox.css("box-shadow", `inset #000000${transparency} 200px 0px 300px 1px`);
+
+        setTimeout(animation, 1000.0/30.0);
+
+      }
+      setTimeout(animation, 1000.0/30.0);
+    });
+  });
+
+  </script>
+</head>
+<body>
+
+    
+  <div id="paint-window">
+    <div id="paint-mat">
+      <div id="paint-box">
+        <canvas id="canvas" width=500 height="600"></canvas>
+      </div>
+      <div id="buntin" class="buntin"></div>
+    </div>
+    <div id="paint-right-tools">
+      
+      <div class="hude-params">  
+        <div class="brush-input">
+          <div id="angle-input" class="inner-circle">
+            <div id="foot-print-angle" class="hude-foot-print">
+              <div id="foot-print-size" class="hude-foot-print-img"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="thickness-input">
+          <div class="hude-input-label">thickness: <span id="thickness-value">12</span></div>
+          <input id="thickness-range" type="range" min=1.0 max="60">
+        </div>
+
+        <div class="blur-input">
+          <div class="hude-input-label">blur: <span id="blur-value">10</div>
+          <input id="blur-range" type="range" min=1.0 max="200.0">
+        </div>
+
+        <div id="clear-btn" class="menu-btn"> clear </div>
+
+      </div>
+
+      <div class="suzuri">
+        <div class="suzuri-inner-box">
+          <div class="suzuri-pond"></div>          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>

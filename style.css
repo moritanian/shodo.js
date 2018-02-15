@@ -1,0 +1,147 @@
+body {
+	background-color: #555;
+    background-image: 
+    	linear-gradient(30deg, #444 12%, transparent 12.5%, transparent 87%, #444 87.5%, #444), 
+    	linear-gradient(150deg, #444 12%, transparent 12.5%, transparent 87%, #444 87.5%, #444),
+    	linear-gradient(30deg, #444 12%, transparent 12.5%, transparent 87%, #444 87.5%, #444), 
+    	linear-gradient(150deg, #444 12%, transparent 12.5%, transparent 87%, #444 87.5%, #444), 
+    	linear-gradient(60deg, #888 25%, transparent 25.5%, transparent 75%, #888 75%, #888), 
+    	linear-gradient(60deg, #888 25%, transparent 25.5%, transparent 75%, #888 75%, #888);
+    background-position: 0 0, 0 0, 25px 50px, 25px 50px, 0 0, 25px 50px;
+    background-size: 50px 100px;
+    overflow: hidden;
+}
+
+#paint-window {
+  
+}
+
+#paint-mat {
+	width: 500px;
+    background-color: #2b2b2b;
+    padding: 10px;
+    box-shadow: #252525 2px 2px 2px;
+    float: left;
+    position: relative;
+}
+
+.buntin {
+	position: absolute;
+    top: 15px;
+    width: 300px;
+    height: 18px;
+    background-color: #444444;
+    left: 100px;
+    box-shadow: #27272787 4px 3px 3px;
+}
+
+#paint-box{
+	position: relative;
+	background-image: url("./image/paper.png");	
+	width: 500px;
+    height: 600px;
+}
+
+#paint-right-tools {
+    float: left;
+    margin-left: 20px;
+}
+
+.hude-params {
+    background-color: #313131eb;
+    box-shadow: #171717 1px 1px;
+    padding: 20px;
+    width: 140px;
+}
+
+.brush-input {
+    width: 140px;
+    height: 140px;
+    border-radius: 70px;
+    background-color: #89c5c5;
+    position: relative;
+}
+
+.brush-input .inner-circle {
+    width: 132px;
+    height: 132px;
+    border-radius: 66px;
+    background-color: #e6e6e6;
+    left: 0;
+    margin: auto;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    cursor: pointer;
+}
+
+.brush-input .hude-foot-print {
+    width: 60px;
+    height: 60px;
+    transform: rotate(10deg);
+    transform-origin: 60px 60px;
+    margin-left: 6px;
+    margin-top: 6px;
+}
+
+.brush-input .hude-foot-print .hude-foot-print-img {
+    background-image: url(./image/brush.png);
+    background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+}
+
+.hude-input-label {
+    color: white;
+}
+
+.suzuri {
+	float: left;
+    width: 180px;
+    height: 300px;
+    background-color: #5d5d5d;
+    margin: 20px 10px;
+    border-radius: 5px;
+    box-shadow: #2d2d2d 4px 15px 1px 0px;
+}
+
+.suzuri .suzuri-inner-box {
+	width: 170px;
+    height: 270px;
+    margin: 20px 5px 2px;
+    background-color: #505050;
+    box-shadow: inset #000000 1px 40px 80px 2px;
+    border-radius: 4px;
+
+}
+
+.suzuri .suzuri-inner-box .suzuri-pond {
+
+}
+
+#canvas {
+	width: 500px;
+	height: 600px;
+}
+
+#clear-btn {
+    background-color: #bfbfbf;
+    box-shadow: black 1px 1px 2px;
+    color: #353535;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#clear-btn:active {
+    box-shadow: inset black 1px 1px 2px;
+}
