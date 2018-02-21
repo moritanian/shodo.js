@@ -91,7 +91,7 @@
       const countMax = 10;
       let $paintBox = $("#paint-box");
       function animation(){
-        count ++;
+        count ++;        
         
         if (count == countMax){
           canvas.clear();
@@ -103,6 +103,9 @@
 
           return;
         }
+
+        setTimeout(animation, 1000.0/30.0);
+        
 
         top += 800 / countMax;
         left -= 100/countMax;
@@ -119,7 +122,6 @@
         }
         $paintBox.css("box-shadow", `inset #000000${transparency} 200px 0px 300px 1px`);
 
-        setTimeout(animation, 1000.0/30.0);
 
       }
       setTimeout(animation, 1000.0/30.0);

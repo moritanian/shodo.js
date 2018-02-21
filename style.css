@@ -48,6 +48,7 @@ body {
 #paint-right-tools {
     float: left;
     margin-left: 20px;
+    user-select: none;
 }
 
 .hude-params {
