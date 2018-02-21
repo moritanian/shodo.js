@@ -71,7 +71,19 @@ var Shodo = (function(Shodo){
       e.preventDefault();
     };
 
+    canvas.el.ontouchstart = function(e) {
+      pointer = canvas.getPointer(e);
+      instance.onMouseDown(pointer);
+      e.preventDefault();
+    };
+
     canvas.el.onmousemove = function(e) {
+      pointer = canvas.getPointer(e);
+      instance.onMouseMove(pointer);
+      e.preventDefault();
+    };
+
+    canvas.el.ontouchmove = function(e) {
       pointer = canvas.getPointer(e);
       instance.onMouseMove(pointer);
       e.preventDefault();
@@ -81,7 +93,16 @@ var Shodo = (function(Shodo){
       instance.onMouseUp();
     };
 
+    canvas.el.ontouchend = function() {
+      instance.onMouseUp();
+    };
+
     canvas.el.onmouseleave = function() {
+      instance.onMouseUp();
+
+    };
+
+    canvas.el.ontouchleave = function() {
       instance.onMouseUp();
 
     };
@@ -97,13 +118,17 @@ var Shodo = (function(Shodo){
     this.ctx = this.el.getContext('2d');
     this.ctx.lineJoin = this.ctx.lineCap = 'round';
 
-    elementOffset = getElementOffset(this.el);
+    let elementOffset = getElementOffset(this.el);
 
     this.clear = function(){
       this.ctx.clearRect(0, 0, this.el.width, this.el.height);
     };
 
     this.getPointer = function(event) {
+      
+      if(event.type.match(/touch/i)){
+        event = event.touches[0];
+      }
 
       var element = event.target ||
                   (typeof event.srcElement !== unknown ? event.srcElement : null),
@@ -126,14 +151,14 @@ var Shodo = (function(Shodo){
   }
 
   var pointerX = function(event) {
-        return event.pageX;
-        //return event.clientX;
-      };
+    return event.pageX;
+    //return event.clientX;
+  };
 
   var pointerY = function(event) {
-        return event.pageY;
-        //return event.clientY;
-      };
+    return event.pageY;
+    //return event.clientY;
+  };
 
   /*
     from http://fabricjs.com/
