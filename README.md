@@ -1,5 +1,7 @@
 # Shodo.js
 
+[![npm version](https://badge.fury.io/js/shodojs.svg)](https://badge.fury.io/js/shodojs)
+
 #### Japanese traditional writing brush ####
 # [![Shodo.js Capture](https://raw.githubusercontent.com/moritanian/shodo.js/gh-pages/screenshot/sample1.png)](https://moritanian.github.io/shodo.js/)
 
@@ -14,4 +16,12 @@
   brush.blur = 10;
   brush.tipAngle = Math.PI/4.0;
 </script>
+```
+
+or
+
+```
+const Shodo = require('shodojs');
+let canvas  = new Shodo.Canvas('canvas');
+...
 ```

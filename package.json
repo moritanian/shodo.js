@@ -1,0 +1,26 @@
+{
+  "name": "shodojs",
+  "version": "1.0.0",
+  "description": "Japanese traditional writing brush",
+  "main": "script/shodo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moritanian/shodo.js.git"
+  },
+  "keywords": [
+    "shodo",
+    "js",
+    "javascript",
+    "Japanese writing brush"
+  ],
+  "author": "Moritanian <pickit2express@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moritanian/shodo.js/issues"
+  },
+  "homepage": "https://github.com/moritanian/shodo.js#readme",
+  "dependencies": {}
+}
